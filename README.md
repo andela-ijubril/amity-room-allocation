@@ -40,7 +40,7 @@ To display the result in an output file
 $ python main.py > output.txt
 ```
 
-
-
-
+To run the tests
+```
+$ python test_main.py
 
