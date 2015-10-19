@@ -25,7 +25,7 @@ class TestingOfficeAllocation(unittest.TestCase):
     def test_can_prepopulate(self):
         self.amity.pre_populate()
         self.assertEquals('Kiln', self.amity.rooms['offices'][0].name)
-        self.assertEquals(len(self.amity.rooms['offices']), 5)
+        self.assertEquals(len(self.amity.rooms['offices']), 10)
         # self.assertIsInstance('Kiln', Office)
         # self.assertIn('Kiln', self.amity.rooms['offices'])
 
