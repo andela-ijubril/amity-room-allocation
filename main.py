@@ -57,10 +57,10 @@ class Building(object):
                     room = random.choice(self.rooms['offices'])
                     counter += 1
                     break
-                print room
+                # print room
                 print len(room.occupants)
                 if room.is_room_filled():
-                    print person
+                    # print person
                     room.occupants.append(person)
                     person.allocated = True
                     # break
@@ -72,10 +72,10 @@ class Building(object):
 
                     room = random.choice(self.rooms['offices'])
                     break
-                print room
+                # print room
                 print len(room.occupants)
                 if room.is_room_filled():
-                    print person
+                    # print person
                     room.occupants.append(person)
                     person.allocated = True
 

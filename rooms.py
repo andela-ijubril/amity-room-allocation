@@ -2,8 +2,6 @@ import abc
 
 __author__ = 'Jubril'
 
-# Room models
-
 
 class Room(object):
     __metaclass__ = abc.ABCMeta
@@ -14,15 +12,18 @@ class Room(object):
         self.name = name
         self.occupants = []
 
+    # Get the occupants in the room
     def get_member_details(self):
         return self.occupants
 
+    # check if the current room is filled
     def is_room_filled(self):
         if len(self.occupants) < self.max_occupants:
             return True
         else:
             return False
 
+    # check if the current room has any occupants
     def has_no_occupant(self):
         if len(self.occupants) > 0:
             return True

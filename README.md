@@ -5,8 +5,7 @@
 
 ```
 Offices prepopulated are:'Carat', 'Anvil', 'Crucible', 'Kiln', 'Forge', 'Foundry', 'Furnace', 'Boiler', 'Mint', 'Vulcan'
-Malerooms prepopulated are:'topaz', 'silver', 'gold', 'onyx', 'opal'
-Femalerooms prepopulated are: 'ruby', 'platinum', 'jade', 'pearl', 'diamond'
+Living Spaces prepopulated are:'topaz', 'silver', 'gold', 'onyx', 'opal'
 ```
 ```
 
