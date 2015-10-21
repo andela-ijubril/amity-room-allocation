@@ -16,8 +16,8 @@ The Conditions are:
 3. office allocation should not exceed 6 persons
 
 ```
-
-######The input into this Script can be found in the input.txt file where the input format can be viewed or seen below:
+######Format of input files
+The input into this Script can be found in the input.txt file where the input format can be viewed or seen below:
 
 ```
 ANDREW PHILLIPS	FELLOW	Y
