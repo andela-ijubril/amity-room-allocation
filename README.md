@@ -41,5 +41,5 @@ $ python main.py > output.txt
 
 To run the tests
 ```
-$ python test_main.py
+$ python -m unittest discover tests
 

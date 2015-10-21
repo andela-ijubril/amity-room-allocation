@@ -12,26 +12,32 @@ class Room(object):
         self.name = name
         self.occupants = []
 
-    # Get the occupants in the room
     def get_member_details(self):
+        """
+        Get the details of the occupants in a room
+        :return: occupants
+        """
         return self.occupants
 
-    # check if the current room is filled
     def is_room_filled(self):
+        """
+            This method checks if the room is filled
+        :return: Boolean
+        """
         if len(self.occupants) < self.max_occupants:
             return True
         else:
             return False
 
-    # check if the current room has any occupants
     def has_no_occupant(self):
+        """
+        This method checks if the current room has any occupants
+        :return: Boolean
+        """
         if len(self.occupants) > 0:
             return True
         else:
             return False
-
-    def is_female(self):
-        pass
 
 
 class LivingSpace(Room):

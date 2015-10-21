@@ -31,7 +31,7 @@ class TestingOfficeAllocation(unittest.TestCase):
 
     def test_file_was_read(self):
         # self.amity.read_file("input.txt")
-        self.assertIsNone(self.amity.read_file("input.txt"))
+        self.assertIsNone(self.amity.read_file("data/input.txt"))
 
     def test_list_of_unallocated_people(self):
         self.assertIsNotNone(self.amity.get_a_list_of_unallocated_people())
@@ -46,7 +46,7 @@ class TestingOfficeAllocation(unittest.TestCase):
 
     def test_allocate(self):
         self.amity.pre_populate()
-        self.amity.read_file("input.txt")
+        self.amity.read_file("data/input.txt")
         self.assertIsNone(self.amity.allocate())
 
 

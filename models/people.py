@@ -11,6 +11,9 @@ class Person(object):
         self.office = None
 
     def is_allocated(self):
+        """
+        This method checks if the current person is allocated
+        """
         return self.allocated
 
 
@@ -29,4 +32,8 @@ class Fellow(Person):
         return self.name
 
     def wants_accomodation(self, choice=True):
+        """
+        This methods checks if the Fellow wants an accommodation
+        :param choice:
+        """
         self.choice = choice
