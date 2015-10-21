@@ -8,6 +8,7 @@ class Person(object):
     def __init__(self, name):
         self.name = name
         self.allocated = False
+        self.office = None
 
     def is_allocated(self):
         return self.allocated
@@ -22,6 +23,7 @@ class Fellow(Person):
     def __init__(self, name):
         super(Fellow, self).__init__(name)
         self.choice = False
+        self.living = None
 
     def __repr__(self):
         return self.name

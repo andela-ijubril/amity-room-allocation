@@ -1,6 +1,6 @@
 import re, random
-from people import Staff, Fellow
-from rooms import LivingSpace, Office
+from models.people import Staff, Fellow
+from models.rooms import LivingSpace, Office
 
 __author__ = 'Jubril'
 
@@ -12,23 +12,20 @@ class Building(object):
             'livingspaces': []
         }
         self.people = []
-        self.available_space = (len(self.rooms['offices']) + len(
-            self.rooms['livingspaces'])) * len(self.people)
 
     def __strip_whitespaces(self, line_to_format):
         match = re.search('(\w+\s[^\s]+)\s{0,}(\w+)\s{0,}(\w?)', line_to_format)
         return match.groups()
 
+    # prepopulate the offices and living spaces
     def pre_populate(self):
         offices = ['Kiln', 'Bellows', 'Tongs', 'SledgeHammer', 'Furnace', "Mars", "Mercury", "Venus", "Earth", "Jupiter"]
         for office_name in offices:
-            office = Office(office_name)
-            self.add_room(office, 'offices')
+            self.add_room(Office(office_name), 'offices')
 
         living_spaces = ['Carat', 'Anvil', 'Heroku', 'Troupon', 'Hacksaw', "Saturn", "Uranus", "Neptune", "Pluto", "Goose"]
         for living_space_name in living_spaces:
-            living_space = LivingSpace(living_space_name)
-            self.add_room(living_space, 'livingspaces')
+            self.add_room(LivingSpace(living_space_name), 'livingspaces')
 
     def add_room(self, room, room_type):
         self.rooms[room_type].append(room)
@@ -39,7 +36,7 @@ class Building(object):
             person = None
             for line in data:
                 fullname, role, choice = self.__strip_whitespaces(line)
-                # print role
+
                 if role == "STAFF":
                     person = Staff(fullname)
                 elif role == "FELLOW":
@@ -49,57 +46,38 @@ class Building(object):
                 self.people.append(person)
 
     def allocate(self):
+        """
+        This method allocates fellows and staffs to living rooms
+        :return:
+        """
+        # print random.shuffle(self.rooms['offices'])
+        # print random.shuffle(self.rooms['livingspaces'])
         for person in self.people:
-            if isinstance(person, Staff):
-                room = random.choice(self.rooms['offices'])
-                counter = 0
-                while not room.is_room_filled() or counter < 100:
-                    room = random.choice(self.rooms['offices'])
-                    counter += 1
+            for office in self.rooms['offices']:
+                if office.is_room_filled():
+                    office.occupants.append(person)
                     break
-                # print room
-                print len(room.occupants)
-                if room.is_room_filled():
+            # Refactor to shuffle the list and then sequentially pick one at a time
+            
+            if isinstance(person, Fellow) and person.choice:
                     # print person
-                    room.occupants.append(person)
-                    person.allocated = True
-                    # break
-            elif isinstance(person, Fellow):
-                # while len(room.occupants) < Office.max_occupants
-                room = random.choice(self.rooms['offices'])
-                counter = 0
-                while not room.is_room_filled() or counter < 100:
-
-                    room = random.choice(self.rooms['offices'])
-                    break
-                # print room
-                print len(room.occupants)
-                if room.is_room_filled():
-                    # print person
-                    room.occupants.append(person)
-                    person.allocated = True
-
-                if person.choice:
-                    print person
                     # assign to living space
                     living_room = random.choice(self.rooms['livingspaces'])
-                    print living_room
+                    # print living_room
                     if living_room.is_room_filled():
                         living_room.occupants.append(person)
 
     def get_allocation_details(self):
         building_offices = self.rooms['offices']
-        # print room
         print "The office allocation details shown below"
         for building_office in building_offices:
-            print building_office, "\n", building_office.occupants
-            # print (key + " (OFFICE)\n", value)
+            print building_office, "(OFFICE)", "\n", building_office.occupants
 
     def get_living_space_details(self):
         living_spaces = self.rooms['livingspaces']
         print "The living space allocatio shown below"
         for living_space in living_spaces:
-            print living_space, "\n", living_space.occupants
+            print living_space, "(LIVING)", "\n", living_space.occupants
 
     def get_members_for_a_particular_office(self, office_name):
         for office in self.rooms['offices']:
@@ -109,6 +87,9 @@ class Building(object):
                 return "Office name is not valid"
 
     def get_a_list_of_unallocated_people(self):
+        """
+            This method gets a list of unallocated people
+        """
         unallocated_list = []
         for person in self.people:
             if not person.is_allocated():
@@ -118,7 +99,8 @@ class Building(object):
 if __name__ == '__main__':
     amity = Building()
     amity.pre_populate()
-    amity.read_file("input.txt")
+    amity.read_file("data/input.txt")
     amity.allocate()
     amity.get_allocation_details()
     amity.get_living_space_details()
+    amity.get_members_for_a_particular_office("Kiln")

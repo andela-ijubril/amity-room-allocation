@@ -1,8 +1,8 @@
 import unittest
 from main import Building
 import __builtin__ as builtin
-from rooms import Office
-from people import Person, Fellow, Staff
+from models.rooms import Office
+from models.people import Person, Fellow, Staff
 
 __author__ = 'Jubril'
 
