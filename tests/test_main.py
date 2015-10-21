@@ -11,6 +11,7 @@ class TestingOfficeAllocation(unittest.TestCase):
 
     def setUp(self):
         self.amity = Building()
+        self.fellow = Fellow("jubril")
 
     def test_can_add_office(self):
         """
