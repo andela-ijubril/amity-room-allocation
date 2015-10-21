@@ -43,6 +43,20 @@ class Building(object):
         """
         self.rooms[room_type].append(room)
 
+    def add_person(self, name, role):
+        """
+        This method adds a person to staff or fellow class depending on the role
+        :param name:
+        :param role:
+        """
+        try:
+            if role == "STAFF":
+                self.people = Staff(name)
+            elif role == "FELLOW":
+                self.people = Fellow(name)
+        except ValueError:
+            return "Invalid role name"
+
     def read_file(self, input_file):
         """
         This method  read file from an input file give as a parameter
