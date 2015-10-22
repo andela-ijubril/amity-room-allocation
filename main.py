@@ -83,10 +83,8 @@ class Building(object):
         This method allocates fellows and staffs to offices
         It also allocate fellows who are interested in getting a room living space
         """
-        # random.shuffle(self.rooms['offices'])
-        # random.shuffle(self.rooms['livingspaces'])
-        # allocated_offices = []
-        # allocated_rooms = []
+        random.shuffle(self.rooms['offices'])
+        random.shuffle(self.rooms['livingspaces'])
         for person in self.people:
             for office in self.rooms['offices']:
                 if office.is_room_filled():
