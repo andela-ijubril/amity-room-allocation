@@ -24,7 +24,7 @@ class Room(object):
             This method checks if the room is filled
         :return: Boolean
         """
-        if len(self.occupants) < self.max_occupants:
+        if len(self.occupants) >= self.max_occupants:
             return True
         else:
             return False

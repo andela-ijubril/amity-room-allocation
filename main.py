@@ -12,6 +12,8 @@ class Building(object):
             'livingspaces': []
         }
         self.people = []
+        self.allocated_offices = []
+        self.allocated_rooms = []
 
     def __strip_whitespaces(self, line_to_format):
         """
@@ -81,27 +83,37 @@ class Building(object):
         This method allocates fellows and staffs to offices
         It also allocate fellows who are interested in getting a room living space
         """
-        random.shuffle(self.rooms['offices'])
-        random.shuffle(self.rooms['livingspaces'])
+        # random.shuffle(self.rooms['offices'])
+        # random.shuffle(self.rooms['livingspaces'])
+        # allocated_offices = []
+        # allocated_rooms = []
         for person in self.people:
             for office in self.rooms['offices']:
                 if office.is_room_filled():
-                    office.occupants.append(person)
-                    person.office = office
-                    break
-            
+                    self.rooms['offices'].remove(office)
+                    continue
+                office.occupants.append(person)
+                if office not in self.allocated_offices:
+                    self.allocated_offices.append(office)
+                person.office = office
+                break
+
             if isinstance(person, Fellow) and person.choice:
                 for living_room in self.rooms['livingspaces']:
                     if living_room.is_room_filled():
-                        living_room.occupants.append(person)
-                        person.living = living_room
-                        break
+                        self.rooms['livingspaces'].remove(living_room)
+                        continue
+                    living_room.occupants.append(person)
+                    if living_room not in self.allocated_rooms:
+                        self.allocated_rooms.append(living_room)
+                    person.living = living_room
+                    break
 
     def get_allocation_details(self):
         """
             This method gets the details of those allocated to offices
         """
-        building_offices = self.rooms['offices']
+        building_offices = self.allocated_offices
         print "The office allocation details shown below"
         for building_office in building_offices:
             print building_office, "(OFFICE)", "\n", building_office.occupants
@@ -110,7 +122,7 @@ class Building(object):
         """
             This method gets the details of those allocated to Living Spaces
         """
-        living_spaces = self.rooms['livingspaces']
+        living_spaces = self.allocated_rooms
         print "The living space allocatio shown below"
         for living_space in living_spaces:
             print living_space, "(LIVING)", "\n", living_space.occupants
@@ -145,4 +157,3 @@ if __name__ == '__main__':
     amity.allocate()
     amity.get_allocation_details()
     amity.get_living_space_details()
-    amity.get_members_for_a_particular_office("Kiln")
