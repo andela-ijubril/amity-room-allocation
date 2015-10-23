@@ -131,21 +131,9 @@ class Building(object):
         :param full_name:
         """
         for person in self.people:
-            if full_name == person.name:
-                return self.get_members_for_a_particular_office(person.get_office().name)
-
-    def get_person_details2(self, name, role):
-
-        person = None
-        if role == "staff":
-            person = Staff(name)
-        elif role == "fellow":
-            person = Fellow(name)
-
-        if person in self.people:
-            for employee in self.people:
-                if name == employee.name:
-                    return self.get_members_for_a_particular_office(employee.get_office().name)
+            if person.name == full_name:
+                if person.get_office():
+                    return person.get_office().occupants
 
     def remove_from_room(self, name):
         """
