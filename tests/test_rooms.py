@@ -27,5 +27,5 @@ class TestingRooms(unittest.TestCase):
         """
         This method test if the room is filled
         """
-        self.assertTrue(self.office.is_room_filled())
-        self.assertTrue(self.living_space.is_room_filled())
+        self.assertFalse(self.office.is_room_filled())
+        self.assertFalse(self.living_space.is_room_filled())

@@ -41,9 +41,6 @@ class Fellow(Person):
     def __repr__(self):
         return self.name
 
-    # def __eq__(self, obj):
-    #     return self.name == obj.name
-
     def wants_accomodation(self, choice=True):
         """
         This methods checks if the Fellow wants an accommodation
