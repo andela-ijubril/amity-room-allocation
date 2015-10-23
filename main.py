@@ -131,10 +131,12 @@ class Building(object):
         Get the office a person is allocated to
         :param full_name:
         """
-        if Person(full_name) in self.people:
+        person = Person(full_name)
+        if person in self.people:
+            person_index = self.people.index(person)
+            person = self.people[person_index]
             if person.get_office():
                 return person.get_office().occupants
-            break
         else:
             return "Not a valid name"
 
@@ -143,12 +145,12 @@ class Building(object):
         This method removes an employee from an office space
         :param name:
         """
-        if Person(name) in self.people:
-            for person in self.people:
-                if person.name == name:
-                    if person.get_office():
-                        person.get_office().occupants.remove(person)
-                    break
+        person = Person(name)
+        if person in self.people:
+            person_index = self.people.index(person)
+            person = self.people[person_index]
+            if person.get_office():
+                return person.get_office().occupants.remove(person)
         else:
             return "Name not valid"
 
