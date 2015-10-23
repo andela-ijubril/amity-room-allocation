@@ -44,9 +44,15 @@ class LivingSpace(Room):
     def __repr__(self):
         return self.name
 
+    def __eq__(self, obj):
+        return self.name == obj.name
+
 
 class Office(Room):
     max_occupants = 6
 
     def __repr__(self):
         return self.name
+
+    def __eq__(self, obj):
+        return self.name == obj.name

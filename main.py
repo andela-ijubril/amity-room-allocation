@@ -1,5 +1,5 @@
 import re, random
-from models.people import Staff, Fellow
+from models.people import Staff, Fellow, Person
 from models.rooms import LivingSpace, Office
 
 __author__ = 'Jubril'
@@ -29,7 +29,7 @@ class Building(object):
         """
         This method prepopulates the office and LivingSpace object with 10 offices and living spaces
         """
-        offices = ['Kiln', 'Bellows', 'Tongs', 'SledgeHammer', 'Furnace', "Mars", "Mercury", "Venus", "Earth", "Jupiter"]
+        offices = ['Kiln', 'Bellows', 'Tongs', 'SledgeHammer', 'SledgeHammer', 'Furnace', "Mars", "Mercury", "Venus", "Earth", "Jupiter"]
         for office_name in offices:
             self.add_room(Office(office_name), 'offices')
 
@@ -121,9 +121,55 @@ class Building(object):
             This method gets the details of those allocated to Living Spaces
         """
         living_spaces = self.allocated_rooms
-        print "The living space allocatio shown below"
+        print "The living space allocation shown below"
         for living_space in living_spaces:
             print living_space, "(LIVING)", "\n", living_space.occupants
+
+    def get_person_details(self, full_name):
+        """
+        Get the office a person is allocated to
+        :param full_name:
+        """
+        for person in self.people:
+            if full_name == person.name:
+                # return person.get_office()
+                return self.get_members_for_a_particular_office(person.get_office().name)
+
+    def get_person_details2(self, name, role):
+
+        person = None
+        if role == "staff":
+            person = Staff(name)
+        elif role == "fellow":
+            person = Fellow(name)
+
+        if person in self.people:
+            for employee in self.people:
+                if name == employee.name:
+                    return self.get_members_for_a_particular_office(employee.get_office().name)
+                    # return employee.get_office(), self.get_members_for_a_particular_office(employee.get_office().name)
+
+    def remove_from_room(self, name):
+        """
+        This method removes an employee from an office space
+        :param name:
+        """
+        # person = None
+        # if role == "staff":
+        #     person = Staff(name)
+        # elif role == "fellow":
+        #     person = Fellow(name)
+        #
+        # if person in self.people:
+        #     self.get_person_details2(name, role).remove(name)
+        for person in self.people:
+            if person.name == name:
+                if person.get_office():
+                    person.get_office().occupants.remove(person)
+
+                break
+
+        # return self.get_person_details(name)
 
     def get_members_for_a_particular_office(self, office_name):
         """
@@ -131,11 +177,9 @@ class Building(object):
         :param office_name:
         :return: Member details in the office
         """
-        for office in self.rooms['offices']:
+        for office in self.allocated_offices:
             if office_name == office.name:
                 return office.get_member_details()
-            else:
-                return "Office name is not valid"
 
     def get_a_list_of_unallocated_people(self):
         """

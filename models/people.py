@@ -10,11 +10,21 @@ class Person(object):
         self.allocated = False
         self.office = None
 
+    def __eq__(self, obj):
+        return self.name == obj.name
+
     def is_allocated(self):
         """
         This method checks if the current person is allocated
         """
         return self.allocated
+
+    def get_office(self):
+        """
+        Get the current office of the person
+        :return:
+        """
+        return self.office
 
 
 class Staff(Person):
@@ -30,6 +40,9 @@ class Fellow(Person):
 
     def __repr__(self):
         return self.name
+
+    # def __eq__(self, obj):
+    #     return self.name == obj.name
 
     def wants_accomodation(self, choice=True):
         """
