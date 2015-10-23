@@ -67,6 +67,21 @@ class TestingOfficeAllocation(unittest.TestCase):
         self.amity.read_file("data/input.txt")
         self.assertIsNone(self.amity.allocate())
 
+    def test_add_person(self):
+        self.assertIsNone(self.amity.add_person("Chitech Aji", "STAFF"))
+
+    def test_remove_employee_from_office(self):
+        self.amity.pre_populate()
+        self.amity.read_file("data/input.txt")
+        self.amity.allocate()
+        self.assertIsNone(self.amity.remove_from_room("AHMED AKUBE"))
+
+    def test_get_employee_roommates(self):
+        self.amity.pre_populate()
+        self.amity.read_file("data/input.txt")
+        self.amity.allocate()
+        self.assertIsNotNone(self.amity.get_person_details("AHMED AKUBE"))
+
 
 if __name__ == '__main__':
     unittest.main()

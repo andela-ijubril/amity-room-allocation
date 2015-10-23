@@ -14,6 +14,7 @@ class Building(object):
         self.people = []
         self.allocated_offices = []
         self.allocated_rooms = []
+        self.unallocated_list = []
 
     def __strip_whitespaces(self, line_to_format):
         """
@@ -130,22 +131,26 @@ class Building(object):
         Get the office a person is allocated to
         :param full_name:
         """
-        for person in self.people:
-            if person.name == full_name:
-                if person.get_office():
-                    return person.get_office().occupants
+        if Person(full_name) in self.people:
+            if person.get_office():
+                return person.get_office().occupants
+            break
+        else:
+            return "Not a valid name"
 
     def remove_from_room(self, name):
         """
         This method removes an employee from an office space
         :param name:
         """
-        for person in self.people:
-            if person.name == name:
-                if person.get_office():
-                    person.get_office().occupants.remove(person)
-
-                break
+        if Person(name) in self.people:
+            for person in self.people:
+                if person.name == name:
+                    if person.get_office():
+                        person.get_office().occupants.remove(person)
+                    break
+        else:
+            return "Name not valid"
 
     def get_members_for_a_particular_office(self, office_name):
         """
@@ -162,11 +167,11 @@ class Building(object):
             This method gets a list of unallocated people
             :return: List of unallocated people
         """
-        unallocated_list = []
+
         for person in self.people:
             if not person.is_allocated():
-                unallocated_list.append(person)
-        return unallocated_list
+                self.unallocated_list.append(person)
+        return self.unallocated_list
 
 if __name__ == '__main__':
     amity = Building()
