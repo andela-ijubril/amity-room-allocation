@@ -12,6 +12,7 @@ class TestingOfficeAllocation(unittest.TestCase):
     def setUp(self):
         self.amity = Building()
         self.fellow = Fellow("jubril")
+        self.amity.read_file("data/input.txt")
 
     def test_can_add_office(self):
         """
@@ -41,7 +42,7 @@ class TestingOfficeAllocation(unittest.TestCase):
         """
         Test to see if the file was read
         """
-        self.assertIsNone(self.amity.read_file("data/input.txt"))
+        self.assertEqual(len(self.amity.people), 35)
 
     def test_list_of_unallocated_people(self):
         """
@@ -64,7 +65,9 @@ class TestingOfficeAllocation(unittest.TestCase):
 
     def test_allocate(self):
         self.amity.pre_populate()
-        self.amity.read_file("data/input.txt")
+        self.amity.allocate()
+        self.assertGreater(len(self.amity.allocated_offices), 0)
+        self.assertGreater(len(self.amity.allocated_rooms), 0)
         self.assertIsNone(self.amity.allocate())
 
     def test_add_person(self):
