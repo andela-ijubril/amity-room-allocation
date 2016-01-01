@@ -4,8 +4,8 @@
 
 
 ```
-Offices prepopulated are:'Carat', 'Anvil', 'Crucible', 'Kiln', 'Forge', 'Foundry', 'Furnace', 'Boiler', 'Mint', 'Vulcan'
-Living Spaces prepopulated are:'topaz', 'silver', 'gold', 'onyx', 'opal'
+Offices prepopulated are: 'Carat', 'Anvil', 'Crucible', 'Kiln', 'Forge', 'Foundry', 'Furnace', 'Boiler', 'Mint', 'Vulcan'
+Living Spaces prepopulated are: 'topaz', 'silver', 'gold', 'onyx', 'opal'
 ```
 ```
 
